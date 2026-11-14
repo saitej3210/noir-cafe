@@ -1,0 +1,161 @@
+﻿.coffee-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  overflow: hidden;
+  background: #050403;
+  color: #f5ead8;
+  font-family: inherit;
+  touch-action: none;
+  user-select: none;
+}
+
+.coffee-intro-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.coffee-intro-shade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(0,0,0,.48), transparent 75%),
+    linear-gradient(0deg, rgba(0,0,0,.62), transparent 38%, rgba(0,0,0,.18));
+}
+
+.coffee-intro-brand {
+  position: absolute;
+  top: clamp(22px, 4vh, 48px);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  letter-spacing: .42em;
+  color: #f0d6a4;
+}
+
+.coffee-intro-brand i {
+  height: 18px;
+  width: 1px;
+  background: rgba(240,214,164,.65);
+}
+
+.coffee-intro-copy {
+  position: absolute;
+  left: clamp(24px, 9vw, 140px);
+  bottom: 22%;
+  text-shadow: 0 3px 30px rgba(0,0,0,.8);
+}
+
+.coffee-eyebrow {
+  font-size: 10px;
+  letter-spacing: .32em;
+  color: #e2c28e;
+}
+
+.coffee-intro-copy h1 {
+  margin: 14px 0 0;
+  font-family: Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(42px, 7vw, 92px);
+  letter-spacing: -.035em;
+}
+
+.coffee-intro-copy p {
+  margin: 4px 0 0;
+  font-family: Georgia, serif;
+  font-size: clamp(18px, 2vw, 26px);
+  font-style: italic;
+  color: #e8d5b5;
+}
+
+.coffee-intro-bottom {
+  position: absolute;
+  left: clamp(24px, 5vw, 72px);
+  right: clamp(24px, 5vw, 72px);
+  bottom: 34px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: #ead8b9;
+  font-size: 9px;
+  letter-spacing: .2em;
+}
+
+.coffee-progress {
+  height: 1px;
+  flex: 1;
+  background: rgba(255,255,255,.3);
+  overflow: hidden;
+}
+
+.coffee-progress i {
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: #d8b477;
+  transform-origin: left;
+}
+
+.coffee-skip {
+  position: absolute;
+  top: clamp(20px, 4vh, 44px);
+  right: clamp(18px, 4vw, 58px);
+  padding: 11px 17px;
+  border: 1px solid rgba(232,211,176,.65);
+  border-radius: 30px;
+  background: rgba(5,4,3,.45);
+  color: #f4e5ca;
+  font: inherit;
+  font-size: 10px;
+  letter-spacing: .17em;
+  cursor: pointer;
+}
+
+.coffee-skip span {
+  margin-left: 9px;
+}
+
+.coffee-skip:hover {
+  background: #d8b477;
+  color: #090705;
+}
+
+@media (max-width: 600px) {
+  .coffee-intro-copy {
+    left: 24px;
+    right: 24px;
+    bottom: 24%;
+  }
+  .coffee-intro-copy h1 {
+    font-size: clamp(40px, 12vw, 66px);
+  }
+  .coffee-intro-bottom {
+    bottom: 25px;
+    gap: 9px;
+    font-size: 8px;
+  }
+  .coffee-intro-brand {
+    left: 24px;
+    transform: none;
+    font-size: 11px;
+  }
+  .coffee-skip {
+    right: 18px;
+    top: 20px;
+    padding: 9px 12px;
+    font-size: 9px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .coffee-intro * {
+    scroll-behavior: auto !important;
+  }
+}
