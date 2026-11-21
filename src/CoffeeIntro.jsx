@@ -20,9 +20,7 @@ export default function CoffeeIntro({ onComplete }) {
   const videoRef = useRef(null)
   const completed = useRef(false)
   const [time, setTime] = useState(0)
-  const [duration, setDuration] = useState(0)
   const [started, setStarted] = useState(false)
-  const [muted, setMuted] = useState(true)
   const [needsTap, setNeedsTap] = useState(false)
   const [leaving, setLeaving] = useState(false)
 
@@ -42,18 +40,24 @@ export default function CoffeeIntro({ onComplete }) {
       try {
         v.muted = false
         await v.play()
-        if (!cancelled) setMuted(false)
       } catch {
         try {
           v.muted = true
           await v.play()
-          if (!cancelled) setMuted(true)
         } catch {
           if (!cancelled) setNeedsTap(true)
         }
       }
     })()
     return () => { cancelled = true }
+  }, [])
+
+  // If autoplay had to start muted, switch the sound on at the visitor's first click / tap / key.
+  useEffect(() => {
+    const unmute = () => { const v = videoRef.current; if (v && v.muted) v.muted = false }
+    const evs = ['pointerdown', 'keydown', 'touchstart']
+    evs.forEach((e) => window.addEventListener(e, unmute, { once: true, passive: true }))
+    return () => evs.forEach((e) => window.removeEventListener(e, unmute))
   }, [])
 
   // Smooth time tracking for the text cues + progress line.
@@ -68,13 +72,6 @@ export default function CoffeeIntro({ onComplete }) {
     return () => cancelAnimationFrame(raf)
   }, [])
 
-  const toggleSound = () => {
-    const v = videoRef.current
-    if (!v) return
-    v.muted = !v.muted
-    setMuted(v.muted)
-  }
-
   const tapToPlay = async () => {
     const v = videoRef.current
     if (!v) return
@@ -85,7 +82,6 @@ export default function CoffeeIntro({ onComplete }) {
 
   const cueIndex = CUES.reduce((acc, c, i) => (time >= c.at && time < c.to ? i : acc), -1)
   const cue = cueIndex >= 0 ? CUES[cueIndex] : null
-  const pct = duration ? Math.min(1, time / duration) : 0
 
   return (
     <section className={`coffee-intro ${leaving ? 'leaving' : ''}`} aria-label="NOIR Cafe cinematic introduction">
@@ -98,7 +94,6 @@ export default function CoffeeIntro({ onComplete }) {
         muted
         preload="auto"
         disablePictureInPicture
-        onLoadedMetadata={(e) => setDuration(e.currentTarget.duration)}
         onPlaying={() => { setStarted(true); setNeedsTap(false) }}
         onEnded={finish}
         onError={finish /* never trap the visitor on a broken video */}
@@ -106,12 +101,6 @@ export default function CoffeeIntro({ onComplete }) {
 
       <div className="coffee-intro-shade" />
       <div className="coffee-intro-grain" />
-      <div className="coffee-bar top" />
-      <div className="coffee-bar bottom" />
-
-      <div className="coffee-intro-brand">
-        <span>NOIR</span><i /><span>CAFÉ</span>
-      </div>
 
       {cue && (
         <div
@@ -132,20 +121,7 @@ export default function CoffeeIntro({ onComplete }) {
         </div>
       )}
 
-      <div className="coffee-intro-bottom">
-        <span>{started ? 'NOW PLAYING' : 'PREPARING YOUR EXPERIENCE...'}</span>
-        <div className="coffee-progress"><i style={{ transform: `scaleX(${pct})` }} /></div>
-        <span>{Math.round(pct * 100)}%</span>
-      </div>
-
-      <div className="coffee-actions">
-        <button className="coffee-btn" onClick={toggleSound} type="button" aria-label={muted ? 'Turn sound on' : 'Mute'}>
-          {muted ? 'SOUND OFF' : 'SOUND ON'} <span>{muted ? '♪̸' : '♪'}</span>
-        </button>
-        <button className="coffee-btn" onClick={skip} type="button">
-          SKIP INTRO <span>↗</span>
-        </button>
-      </div>
+      <button className="coffee-skip" onClick={skip} type="button">SKIP</button>
 
       {needsTap && (
         <button className="coffee-tap" onClick={tapToPlay} type="button">

@@ -12,7 +12,6 @@ import Building from './Rooms.jsx'
 import Atmosphere from './Atmosphere.jsx'
 import CameraRig from './CameraRig.jsx'
 import Tables from './Tables.jsx'
-import FoodStage from './FoodStage.jsx'
 import { QUALITY } from './quality.js'
 
 // Image-based lighting: a neutral studio-interior environment gives marble, brass, glass and lacquer something believable to reflect.
@@ -87,7 +86,6 @@ export default function Scene() {
       <Atmosphere />
       <CameraRig />
       <Tables />
-      <FoodStage />
       {tier > 0 && (
         <EffectComposer key={tier} multisampling={0} disableNormalPass>
           {tier === 2 ? <N8AO halfRes aoRadius={1.3} distanceFalloff={1.2} intensity={2.2} quality="low" /> : <></>}

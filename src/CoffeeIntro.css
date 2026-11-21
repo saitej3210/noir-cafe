@@ -33,7 +33,7 @@
   pointer-events: none;
   background:
     radial-gradient(120% 90% at 50% 50%, transparent 45%, rgba(0,0,0,.55) 100%),
-    linear-gradient(0deg, rgba(0,0,0,.55), transparent 34%, rgba(0,0,0,.28));
+    linear-gradient(0deg, rgba(0,0,0,.72), rgba(0,0,0,.25) 45%, rgba(0,0,0,.3));
 }
 .coffee-intro-grain {
   position: absolute;
@@ -49,25 +49,6 @@
   50% { transform: translate(2%,-3%); } 75% { transform: translate(-2%,-1%); } 100% { transform: translate(0,0); }
 }
 
-/* Letterbox bars that ease open */
-.coffee-bar {
-  position: absolute; left: 0; right: 0; height: 7vh; background: #000; pointer-events: none;
-  animation: coffee-bar 1.6s cubic-bezier(.2,.7,.1,1) .2s forwards;
-}
-.coffee-bar.top { top: 0; transform-origin: top; }
-.coffee-bar.bottom { bottom: 0; transform-origin: bottom; }
-@keyframes coffee-bar { from { transform: scaleY(1); } to { transform: scaleY(0); } }
-
-.coffee-intro-brand {
-  position: absolute;
-  top: clamp(22px, 4vh, 48px);
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex; align-items: center; gap: 12px;
-  font-size: 13px; letter-spacing: .42em; color: #f0d6a4;
-  text-shadow: 0 2px 18px rgba(0,0,0,.7);
-}
-.coffee-intro-brand i { height: 18px; width: 1px; background: rgba(240,214,164,.65); }
 
 /* ---------- Cinematic title cards ---------- */
 .cue {
@@ -76,9 +57,9 @@
   text-shadow: 0 4px 40px rgba(0,0,0,.75), 0 1px 3px rgba(0,0,0,.6);
   animation: cue-out .7s ease calc(var(--dur) - .7s) forwards;
 }
-.cue-left   { left: clamp(24px, 8vw, 130px);  bottom: 22%; text-align: left; }
-.cue-right  { right: clamp(24px, 8vw, 130px); bottom: 22%; text-align: right; }
-.cue-center { left: 50%; bottom: 24%; transform: translateX(-50%); text-align: center; width: 90vw; }
+.cue-left   { left: clamp(24px, 8vw, 130px);  bottom: 16%; text-align: left; }
+.cue-right  { right: clamp(24px, 8vw, 130px); bottom: 16%; text-align: right; }
+.cue-center { left: 50%; bottom: 18%; transform: translateX(-50%); text-align: center; width: 90vw; }
 .cue-right .cue-rule { margin-left: auto; }
 .cue-center .cue-rule { margin-left: auto; margin-right: auto; }
 
@@ -86,7 +67,9 @@
   display: block;
   font-size: 11px;
   letter-spacing: .38em;
-  color: #e2c28e;
+  color: #f3d9a6;
+  font-weight: 600;
+  text-shadow: 0 2px 14px rgba(0,0,0,.95), 0 0 30px rgba(0,0,0,.8);
   opacity: 0;
   animation: cue-eyebrow 1.1s cubic-bezier(.2,.7,.1,1) .05s forwards;
 }
@@ -138,38 +121,9 @@
 @keyframes cue-eyebrow { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 @keyframes cue-rule { to { width: min(220px, 40vw); } }
 @keyframes cue-out { to { opacity: 0; filter: blur(8px); transform: translateY(-14px); } }
-.cue-center { --x: -50%; }
 .cue-center { animation-name: cue-out-c; }
 @keyframes cue-out-c { to { opacity: 0; filter: blur(8px); transform: translateX(-50%) translateY(-14px); } }
 .cue-final.cue-center { animation: none; }
-
-.coffee-intro-bottom {
-  position: absolute;
-  left: clamp(24px, 5vw, 72px); right: clamp(24px, 5vw, 72px);
-  bottom: 34px;
-  display: flex; align-items: center; gap: 16px;
-  color: #ead8b9; font-size: 9px; letter-spacing: .2em;
-}
-.coffee-progress { height: 1px; flex: 1; background: rgba(255,255,255,.3); overflow: hidden; }
-.coffee-progress i { display: block; height: 100%; width: 100%; background: #d8b477; transform-origin: left; }
-
-.coffee-actions {
-  position: absolute;
-  top: clamp(20px, 4vh, 44px); right: clamp(18px, 4vw, 58px);
-  display: flex; gap: 10px;
-}
-.coffee-btn {
-  padding: 11px 17px;
-  border: 1px solid rgba(232,211,176,.65);
-  border-radius: 30px;
-  background: rgba(5,4,3,.45);
-  color: #f4e5ca;
-  font: inherit; font-size: 10px; letter-spacing: .17em;
-  cursor: pointer;
-  backdrop-filter: blur(6px);
-}
-.coffee-btn span { margin-left: 9px; }
-.coffee-btn:hover { background: #d8b477; color: #090705; }
 
 .coffee-tap {
   position: absolute; inset: 0; margin: auto; width: max-content; height: max-content;
@@ -182,17 +136,29 @@
 .coffee-tap b { margin-right: 12px; color: #d8b477; }
 
 @media (max-width: 600px) {
-  .cue-left, .cue-right { left: 24px; right: 24px; bottom: 24%; text-align: left; }
+  .cue-left, .cue-right { left: 24px; right: 24px; bottom: 18%; text-align: left; }
   .cue-right .cue-rule { margin-left: 0; }
   .cue-title { font-size: clamp(40px, 13vw, 70px); }
   .cue-eyebrow { font-size: 9px; letter-spacing: .3em; }
-  .coffee-intro-bottom { bottom: 25px; gap: 9px; font-size: 8px; }
-  .coffee-intro-brand { left: 24px; transform: none; font-size: 11px; }
-  .coffee-actions { right: 18px; top: 20px; gap: 6px; }
-  .coffee-btn { padding: 9px 11px; font-size: 9px; }
+  .coffee-skip { right: 18px; top: 20px; padding: 9px 16px; font-size: 10px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .coffee-intro-video { animation: none; }
   .coffee-intro-grain { animation: none; }
 }
+
+.coffee-skip {
+  position: absolute;
+  top: clamp(20px, 4vh, 44px); right: clamp(18px, 4vw, 58px);
+  padding: 11px 24px;
+  border: 1px solid rgba(232,211,176,.65);
+  border-radius: 30px;
+  background: rgba(5,4,3,.4);
+  color: #f4e5ca;
+  font: inherit; font-size: 11px; letter-spacing: .3em;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  transition: background .3s, color .3s;
+}
+.coffee-skip:hover { background: #d8b477; color: #090705; }

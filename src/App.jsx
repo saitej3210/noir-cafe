@@ -1,4 +1,4 @@
-﻿import { Suspense, useEffect, useRef, useState } from 'react'
+import { Suspense, useEffect, useRef, useState } from 'react'
 import { useProgress } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import * as THREE from 'three'
@@ -43,7 +43,7 @@ function MenuCard({ id, side, m, onReserve }) {
   )
 }
 
-// Synthesised cafÃ© ambience (soft murmur + warm pad) â€” no audio files needed.
+// Synthesised café ambience (soft murmur + warm pad) — no audio files needed.
 function createAmbience() {
   const ctx = new (window.AudioContext || window.webkitAudioContext)()
   const master = ctx.createGain(); master.gain.value = 0; master.connect(ctx.destination)
@@ -139,7 +139,7 @@ export default function App() {
           <Suspense fallback={null}><Scene /></Suspense>
         </Canvas>
       </div>
-      <div className={`hero ${intro !== 'done' ? 'wait' : ''}`}><h1>NOIR CAFÃ‰</h1><p>Beyond Coffee. Into Experience.</p></div>
+      <div className={`hero ${intro !== 'done' ? 'wait' : ''}`}><h1>NOIR CAFÉ</h1><p>Beyond Coffee. Into Experience.</p></div>
       {ROOMS.map((r, i) => (
         <div key={r.id} id={`room-text-${i}`} className={`room-text ${r.side}`}>
           <h2><Split text={r.title} /></h2><p>{r.text}</p>
@@ -152,25 +152,25 @@ export default function App() {
       <div className="bar" />
       <div className={`controls ${intro !== 'done' ? 'wait' : ''}`}>
         <button onClick={() => openBooking(AREA_BY_ROOM[active])}>Reserve</button>
-        <button onClick={toggleMood}>{night ? 'â˜€ Day' : 'â˜¾ Night'}</button>
-        <button className={tour ? 'on' : ''} onClick={toggleTour}>{tour ? 'âšâš Pause tour' : 'â–¶ Auto tour'}</button>
-        <button className={sound ? 'on' : ''} onClick={toggleSound}>{sound ? 'â™ª Sound on' : 'â™ª Sound'}</button>
+        <button onClick={toggleMood}>{night ? '☀ Day' : '☾ Night'}</button>
+        <button className={tour ? 'on' : ''} onClick={toggleTour}>{tour ? '❚❚ Pause tour' : '▶ Auto tour'}</button>
+        <button className={sound ? 'on' : ''} onClick={toggleSound}>{sound ? '♪ Sound on' : '♪ Sound'}</button>
       </div>
       <nav className="rail" aria-label="Rooms">
         {ROOMS.map((r, i) => (
           <button key={r.id} className={i === active ? 'on' : ''} onClick={() => scrollToU(ROOM_U[i])} aria-label={r.name}><span>{r.name}</span></button>
         ))}
       </nav>
-      <div className={`hint ${intro !== 'done' ? 'wait' : ''}`}>Scroll to enter Â· or use â† â†’</div>
+      <div className={`hint ${intro !== 'done' ? 'wait' : ''}`}>Scroll to enter · or use ← →</div>
       <div id="caption" className="caption" />
       {QUALITY.debug && <pre id="debug" style={{ position: 'fixed', top: 8, left: 8, zIndex: 9, margin: 0, padding: 8, background: 'rgba(0,0,0,.7)', color: '#9f9', fontSize: 12 }} />}
-      <div className={`loader ${ready ? 'done' : ''}`}>NOIR CAFÃ‰<i style={{ transform: `scaleX(${loaded / 100})` }} /></div>
+      <div className={`loader ${ready ? 'done' : ''}`}>NOIR CAFÉ<i style={{ transform: `scaleX(${loaded / 100})` }} /></div>
       {intro !== 'done' && <CoffeeIntro onComplete={() => enter(false)} /> }
       <div className={`tools ${intro !== 'done' ? 'wait' : ''}`}>
-        <button title="Lite mode (smoother on slow devices)" className={lite ? 'on' : ''} onClick={toggleLite}>âš¡</button>
-        <button title="Owner dashboard" onClick={() => setOwner(true)}>ðŸ”‘</button>
-        <button title="Fullscreen" onClick={toggleFs}>â›¶</button>
-        <button title="Hide / show interface" onClick={() => document.documentElement.classList.toggle('clean')}>â—»</button>
+        <button title="Lite mode (smoother on slow devices)" className={lite ? 'on' : ''} onClick={toggleLite}>Lite mode</button>
+        <button title="Owner dashboard" onClick={() => setOwner(true)}>Owner login</button>
+        <button title="Fullscreen" onClick={toggleFs}>Fullscreen</button>
+        <button title="Hide / show interface" onClick={() => document.documentElement.classList.toggle('clean')}>Hide / Show UI</button>
       </div>
       <div className="scroll-track" />
     </>
