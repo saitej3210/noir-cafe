@@ -66,3 +66,11 @@ Only files in `src/scene/` changed (plus the `@fontsource/cormorant-garamond` de
 - **Detailing** (`Details.jsx`) – laid tables (plates, cutlery, glasses, napkins, candles, flowers), cups and cake domes on the bar, rugs, timber ceiling beams, skirting, inlaid floor border.
 - **Furniture/plants** – chairs rebuilt with thickness and bevels; leaf texture with veins; darker natural greens.
 - **Reliability** – 3D text uses a bundled font, so the scene no longer fails when the font CDN is blocked.
+
+## Owner Studio v2 (analytics)
+- **Analytics tab:** pre-order revenue, bookings, guests, average party and spend with ▲▼ vs previous period, revenue trend, busy hours, top dishes, bookings by area, most-booked tables and rule-based smart insights (7 / 30 days).
+- **Guide:** a welcome card after every unlock and an "ℹ️ What is this?" box on every tab explain what each option does (`HELP` in `Owner.jsx`).
+- **Floor, Reservations (search + Active/Today/All filters), Menu manager, Reports (CSV export, print).**
+- **Light / dark** toggle inside the studio (scoped CSS variables under `.ow` in `styles.css`; black/grey + orange and off-white + orange).
+- **Sample data:** Reports → "Add sample history" creates ~30 days of tagged demo bookings (`seedDemoHistory` in `bookings.js`); remove with one click.
+- Mobile: 44px touch targets, 16px inputs (no iOS zoom), sticky tabs, momentum scrolling.

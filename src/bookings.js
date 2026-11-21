@@ -25,3 +25,20 @@ export const setStatus = (ref, status) => save(cache.map((b) => (b.ref === ref ?
 export const removeBooking = (ref) => save(cache.filter((b) => b.ref !== ref))
 export const useBookings = () => useSyncExternalStore((f) => { subs.add(f); return () => subs.delete(f) }, () => cache)
 export const activeFor = (list, tableId, date) => list.find((b) => b.tableId === tableId && b.status !== 'done' && b.date === date)
+
+// ---- sample history so the owner analytics have something to show (flagged demo:true, removable) ----
+export function seedDemoHistory(tables, items, days = 30) {
+  if (cache.some((b) => b.demo)) return 0
+  const names = ['Arjun', 'Meera', 'Kiran', 'Sana', 'Rahul', 'Priya', 'Imran', 'Divya', 'Vikram', 'Anu', 'Neha', 'Sai'], times = ['13:00', '13:30', '14:00', '19:00', '19:30', '20:00', '20:00', '20:30', '21:00', '21:30', '22:00'], out = []
+  const pick = (a) => a[Math.floor(Math.random() * a.length)]
+  for (let k = 1; k <= days; k++) {
+    const d = new Date(); d.setDate(d.getDate() - k)
+    const date = `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`, n = 2 + Math.floor(Math.random() * 4) + ([0, 5, 6].includes(d.getDay()) ? 2 : 0)
+    for (let i = 0; i < n; i++) {
+      const t = pick(tables), guests = 1 + Math.floor(Math.random() * t.seats), order = Math.random() < 0.6 && items.length ? [...Array(1 + Math.floor(Math.random() * 3))].map(() => { const m = pick(items); return { n: m.n, q: 1 + Math.floor(Math.random() * guests), p: m.p } }) : []
+      out.push({ ref: `NC-D${k}-${i}`, name: pick(names), phone: '9000000000', tableId: t.id, area: t.area, guests, time: pick(times), date, note: '', order, status: 'done', at: d.getTime(), demo: true })
+    }
+  }
+  save([...cache, ...out]); return out.length
+}
+export const clearDemoHistory = () => save(cache.filter((b) => !b.demo))
