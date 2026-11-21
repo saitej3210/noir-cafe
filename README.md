@@ -35,7 +35,8 @@ npm run dev
 - Every menu card has a **Reserve here** button that opens the booking form with that room pre-selected.
 - **Plant models:** Poly Haven / Kenney / Quaternius (CC0), Sketchfab (check licence). Convert to one `.glb` (`npx @gltf-transform/cli optimize in.glb plant.glb`), keep it under ~5 MB, save as `public/models/plant.glb`.
 
-- **Cinematic intro:** letterbox bars open, title reveals letter by letter, camera dollies in from far away on **Enter** (or *Enter with sound ♪*). Scroll is locked until then.
+- **Cinematic intro:** full-screen autoplay video (`public/intro/noir-intro.mp4`) with timed cinematic title cards (edit `CUES` in `src/CoffeeIntro.jsx`); no scrolling needed, Skip + Sound buttons. After it ends the 3D café begins.
+- **(older) Cinematic intro:** letterbox bars open, title reveals letter by letter, camera dollies in from far away on **Enter** (or *Enter with sound ♪*). Scroll is locked until then.
 - Tools (bottom-right): ⚡ Lite mode, ⛶ fullscreen, ◻ hide UI for clean cinematic viewing. WhatsApp share on the booking confirmation.
 
 - **Table-to-table tour:** the camera stops at every table (T1–T6 hall, T7 private, G1–G4 garden); `TABLES` + `WAYPOINTS` in `layout.js`.
